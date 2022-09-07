@@ -35,3 +35,7 @@ This involves a stream of values. Which can be one stream or multiple streams de
     An observable will become a stream only after you subscribe to it using the .subscribe method
 
     interval$.subscribe(val => console.log(`Stream 1 ${val}`));
+
+
+Observables only either emits values, errors out, or completes.
+Never call .next on an already completed observable, this breaks the observable contract.

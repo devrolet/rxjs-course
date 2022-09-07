@@ -27,26 +27,35 @@ export class AboutComponent implements OnInit {
 
     ngOnInit() {
 
-        // Use $ after the variable name if it is to become an observable.
-        // Use timer to wait an initial amount of time then start emitting values
-        const interval$ = timer(3000, 1000);
+        // Build own HTTP observable
 
-        // An observable becomes a stream only after you subscribe to it.
-        const sub = interval$.subscribe(val => console.log(`Stream 1 ${val}`));
-
-        // Unsubscribe
-        setTimeout(() => sub.unsubscribe(), 5000);
         
 
-        const click$ = fromEvent(document, 'click');
+        const http$  = Observable.create(observer => {
+            // Fetch method with data endpoint
+            fetch('/api/courses')
+                .then(response => {
+                    return response.json();
+                })
+                .then(body => {
+                    // emits values
+                    observer.next(body);
+                    // completes observable
+                    observer.complete();
+                })
+                .catch(err => {
+                    // catches error if found
+                    observer.error(err);
+                }) ;
+        });
 
-        click$.subscribe(
-            evt => console.log(evt),
-            // Error handling - will stop the stream instead of moving on to complete case
-            err => console.log(err),
-            // in case it completes
+        http$.subscribe(
+            courses => console.log(courses),
+            noop,
             () => console.log("completed")
-        );
+        )
+
+
 
     }
 
