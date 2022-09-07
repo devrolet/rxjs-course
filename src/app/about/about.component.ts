@@ -32,7 +32,10 @@ export class AboutComponent implements OnInit {
         const interval$ = timer(3000, 1000);
 
         // An observable becomes a stream only after you subscribe to it.
-        interval$.subscribe(val => console.log(`Stream 1 ${val}`));
+        const sub = interval$.subscribe(val => console.log(`Stream 1 ${val}`));
+
+        // Unsubscribe
+        setTimeout(() => sub.unsubscribe(), 5000);
         
 
         const click$ = fromEvent(document, 'click');
