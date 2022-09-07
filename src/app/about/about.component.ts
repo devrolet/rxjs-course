@@ -37,7 +37,13 @@ export class AboutComponent implements OnInit {
 
         const click$ = fromEvent(document, 'click');
 
-        click$.subscribe(evt => console.log(evt));
+        click$.subscribe(
+            evt => console.log(evt),
+            // Error handling - will stop the stream instead of moving on to complete case
+            err => console.log(err),
+            // in case it completes
+            () => console.log("completed")
+        );
 
     }
 
