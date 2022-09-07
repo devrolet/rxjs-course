@@ -27,18 +27,12 @@ export class AboutComponent implements OnInit {
 
     ngOnInit() {
 
-        document.addEventListener('click', evt => console.log(evt));
+        // Use $ after the variable name if it is to become an observable. This does not 
+        const interval$ = interval(1000);
 
-        let counter = 0; 
-
-        // setInterval(() => {
-            // console.log(counter);
-            // counter++;
-        // }, 1000);
-
-        setTimeout(() => {
-            console.log('finished...');
-        }, 3000);
+        // An observable becomes a stream only after you subscribe to it.
+        interval$.subscribe(val => console.log(`Stream 1 ${val}`));
+        interval$.subscribe(val => console.log(`Stream 2 ${val}`));
 
     }
 

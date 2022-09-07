@@ -1,5 +1,7 @@
 RXJS NOTES 
 
+Official RxJS documentation: https://reactivex.io 
+
 What is a stream?
 
 This involves a stream of values. Which can be one stream or multiple streams depending on the code. Users can use examples such as the ones below to get an understanding of how streams work.
@@ -25,3 +27,11 @@ This involves a stream of values. Which can be one stream or multiple streams de
 
     RXJS = Reactive Xtensions for JavaScript
     RXJS is meant to combine multiple streams of values effectively without creating "callback hell".
+
+    What is an RXJS Observable?
+
+    Use $ at the of a variable that is an Observable. i.e. const interval$ = interval(1000);
+    Simply declaring the Observable will not activate it. It is simply a definition for how the observable will behave. 
+    An observable will become a stream only after you subscribe to it using the .subscribe method
+
+    interval$.subscribe(val => console.log(`Stream 1 ${val}`));
