@@ -27,12 +27,17 @@ export class AboutComponent implements OnInit {
 
     ngOnInit() {
 
-        // Use $ after the variable name if it is to become an observable. This does not 
-        const interval$ = interval(1000);
+        // Use $ after the variable name if it is to become an observable.
+        // Use timer to wait an initial amount of time then start emitting values
+        const interval$ = timer(3000, 1000);
 
         // An observable becomes a stream only after you subscribe to it.
         interval$.subscribe(val => console.log(`Stream 1 ${val}`));
-        interval$.subscribe(val => console.log(`Stream 2 ${val}`));
+        
+
+        const click$ = fromEvent(document, 'click');
+
+        click$.subscribe(evt => console.log(evt));
 
     }
 
