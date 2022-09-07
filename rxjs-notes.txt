@@ -1,0 +1,27 @@
+RXJS NOTES 
+
+What is a stream?
+
+This involves a stream of values. Which can be one stream or multiple streams depending on the code. Users can use examples such as the ones below to get an understanding of how streams work.
+
+    // This stream emits a value every time the user clicks anywhere on the page.
+    document.addEventListener('click', evt => console.log(evt));
+
+    // 11-16 Sets a counter then the setInterval method logs the counter to the console. The counter then iterates by 1 every 1 second. Do not do this in practice. It'll create an infinite loop and continue logging values in perpetuity.
+    let counter = 0; 
+
+    setInterval(() => {
+        console.log(counter);
+        counter++;
+    }, 1000);
+
+    // Set timeout will emit a value after a set amoutn of time and cut off. In this example the console will wait 3 seconds and then it'll log the word finished...
+    setTimeout(() => {
+        console.log('finished...');
+    }, 3000);
+
+
+    What is rxjs? What problem does it solve?
+
+    RXJS = Reactive Xtensions for JavaScript
+    RXJS is meant to combine multiple streams of values effectively without creating "callback hell".
