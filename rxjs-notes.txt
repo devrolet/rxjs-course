@@ -51,4 +51,6 @@ CONCATMAP - Maps each value to an Observable, then flattens all of these inner O
 https://reactivex.io/documentation/operators/flatmap.html
 
 
+MERGEMAP - Maps each value to an Observable, then flattens all of these inner Observables using mergeAll.
+https://rxjs.dev/api/index/function/mergeMap
 
