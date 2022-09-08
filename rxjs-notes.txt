@@ -47,5 +47,8 @@ https://reactivex.io/documentation/operators/map.html
 
 Give everything a type when using map operators.
 
+CONCATMAP - Maps each value to an Observable, then flattens all of these inner Observables using concatAll 
+https://reactivex.io/documentation/operators/flatmap.html
+
 
 
