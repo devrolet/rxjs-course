@@ -13,10 +13,9 @@ import {Store} from '../common/store.service';
     templateUrl: './course-dialog.component.html',
     styleUrls: ['./course-dialog.component.css']
 })
-export class CourseDialogComponent implements AfterViewInit {
+export class CourseDialogComponent implements OnInit, AfterViewInit {
 
     form: FormGroup;
-
     course:Course;
 
     @ViewChild('saveButton', { static: true }) saveButton: ElementRef;
@@ -40,16 +39,34 @@ export class CourseDialogComponent implements AfterViewInit {
 
     }
 
+    ngOnInit() {
+        this.form.valueChanges
+            .pipe(
+                filter(() => this.form.valid)
+            )
+            .subscribe(changes => {
+                const saveCourses$ = fromPromise(fetch(`/api/courses/${this.course.id}`,{
+                    method: 'PUT',
+                    body: JSON.stringify(changes),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }));
+
+                saveCourses$.subscribe();
+            })
+    }
+
     ngAfterViewInit() {
 
     }
 
     save() {
-        this.store.saveCourse(this.course.id, this.form.value)
-            .subscribe(
-                () => this.close(),
-                err => console.log("Error saving course", err)
-            );
+        // this.store.saveCourse(this.course.id, this.form.value)
+        //     .subscribe(
+        //         () => this.close(),
+        //         err => console.log("Error saving course", err)
+        //     );
     }
 
 
