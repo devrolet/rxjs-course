@@ -39,3 +39,11 @@ This involves a stream of values. Which can be one stream or multiple streams de
 
 Observables only either emits values, errors out, or completes.
 Never call .next on an already completed observable, this breaks the observable contract.
+
+OPERATORS
+
+MAP - transform the items emitted by an Observable by applying a function to each item.
+https://reactivex.io/documentation/operators/map.html
+
+
+
