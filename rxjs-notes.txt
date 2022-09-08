@@ -45,5 +45,7 @@ OPERATORS
 MAP - transform the items emitted by an Observable by applying a function to each item.
 https://reactivex.io/documentation/operators/map.html
 
+Give everything a type when using map operators.
+
 
 
