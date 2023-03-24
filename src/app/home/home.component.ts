@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
                 tap(() => console.log("HTTP Request Executed")),
                 map(res => Object.values(res["payload"])),
                 shareReplay(),
+                // Error Handling Strategy: Catch & Replace
                 catchError(err => of([
                     {
                         id: 0,
