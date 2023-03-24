@@ -31,12 +31,12 @@ export class HomeComponent implements OnInit {
                     console.log(`Error Occurred: ${err}`);
                     return throwError(err);
                 }),
-                tap(() => console.log("HTTP Request Executed")),
-                map(res => Object.values(res["payload"])),
-                shareReplay(),
                 finalize(() => {
                     console.log('Finalize executed...');
-                })
+                }),
+                tap(() => console.log("HTTP Request Executed")),
+                map(res => Object.values(res["payload"])),
+                shareReplay()
             );
 
         this.beginnerCourses$ = courses$
