@@ -25,18 +25,13 @@ export class HomeComponent implements OnInit {
 
         const courses$ = http$
             .pipe(
-                // Better way to handle the error, before the positive scenario
-                catchError(err => {
-                    // Error Handling Strategy: Catch & Rethrow
-                    console.log(`Error Occurred: ${err}`);
-                    return throwError(err);
-                }),
-                finalize(() => {
-                    console.log('Finalize executed...');
-                }),
                 tap(() => console.log("HTTP Request Executed")),
                 map(res => Object.values(res["payload"])),
-                shareReplay()
+                shareReplay(),
+                // Error Handling Strategy: Retry
+                retryWhen(errors => errors.pipe(
+                    delayWhen(() => timer(2000) )
+                ) )
             );
 
         this.beginnerCourses$ = courses$
