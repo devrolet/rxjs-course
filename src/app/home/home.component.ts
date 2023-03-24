@@ -25,14 +25,15 @@ export class HomeComponent implements OnInit {
 
         const courses$ = http$
             .pipe(
-                tap(() => console.log("HTTP Request Executed")),
-                map(res => Object.values(res["payload"])),
-                shareReplay(),
+                // Better way to handle the error, before the positive scenario
                 catchError(err => {
                     // Error Handling Strategy: Catch & Rethrow
                     console.log(`Error Occurred: ${err}`);
                     return throwError(err);
                 }),
+                tap(() => console.log("HTTP Request Executed")),
+                map(res => Object.values(res["payload"])),
+                shareReplay(),
                 finalize(() => {
                     console.log('Finalize executed...');
                 })
