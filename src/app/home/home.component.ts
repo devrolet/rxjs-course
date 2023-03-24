@@ -32,6 +32,9 @@ export class HomeComponent implements OnInit {
                     // Error Handling Strategy: Catch & Rethrow
                     console.log(`Error Occurred: ${err}`);
                     return throwError(err);
+                }),
+                finalize(() => {
+                    console.log('Finalize executed...');
                 })
             );
 
