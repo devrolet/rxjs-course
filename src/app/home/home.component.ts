@@ -28,18 +28,11 @@ export class HomeComponent implements OnInit {
                 tap(() => console.log("HTTP Request Executed")),
                 map(res => Object.values(res["payload"])),
                 shareReplay(),
-                // Error Handling Strategy: Catch & Replace
-                catchError(err => of([
-                    {
-                        id: 0,
-                        description: "RxJs In Practice Course",
-                        iconUrl: 'https://s3-us-west-1.amazonaws.com/angular-university/course-images/rxjs-in-practice-course.png',
-                        courseListIcon: 'https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png',
-                        longDescription: "Understand the RxJs Observable pattern, learn the RxJs Operators via practical examples",
-                        category: 'BEGINNER',
-                        lessonsCount: 10
-                    }
-                ]))
+                catchError(err => {
+                    // Error Handling Strategy: Catch & Rethrow
+                    console.log(`Error Occurred: ${err}`);
+                    return throwError(err);
+                })
             );
 
         this.beginnerCourses$ = courses$
