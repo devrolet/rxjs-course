@@ -27,13 +27,11 @@ export class AboutComponent implements OnInit {
 
     ngOnInit() {
         
-        const interval$ = interval(1000);
+        const http$ = createHttpObservable('/api/courses');
 
-        const interval2$ = interval$.pipe(map(val => 10 * val));
+        const sub = http$.subscribe(console.log);
 
-        const result$ = merge(interval$, interval2$);
-
-        // result$.subscribe(console.log);
+        setTimeout(() => sub.unsubscribe(), 0);
 
     }
 

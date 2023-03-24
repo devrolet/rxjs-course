@@ -91,7 +91,7 @@ export const LESSONS = {
     },
     2: {
         id: 2,
-        "description": "Building Your First  Component - Component Composition",
+        "description": "Building Your First Component - Component Composition",
         "duration": "2:07",
         "seqNo": 2,
         courseId: 1

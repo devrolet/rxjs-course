@@ -42,10 +42,11 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
-        this.courseId = this.route.snapshot.params['id'];
+        this.courseId = this.route.snapshot.params.id;
 
         this.course$ = this.store.selectCourseById(this.courseId);
 
+        this.lessons$ = this.loadLessons();
     }
 
     ngAfterViewInit() {
@@ -74,14 +75,3 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
