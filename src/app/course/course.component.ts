@@ -35,7 +35,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     @ViewChild('searchInput', { static: true }) input: ElementRef;
 
-    constructor(private route: ActivatedRoute, private store: Store) {
+    constructor(private route: ActivatedRoute) {
 
 
     }
@@ -44,24 +44,20 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
         this.courseId = this.route.snapshot.params.id;
 
-        this.course$ = this.store.selectCourseById(this.courseId);
+        this.course$ = createHttpObservable(`/api/courses/${this.courseId}`);
 
-        this.lessons$ = this.loadLessons();
     }
 
     ngAfterViewInit() {
 
-        const searchLessons$ =  fromEvent<any>(this.input.nativeElement, 'keyup')
-            .pipe(
-                map(event => event.target.value),
-                debounceTime(400),
-                distinctUntilChanged(),
-                switchMap(search => this.loadLessons(search))
-            );
-
-        const initialLessons$ = this.loadLessons();
-
-        this.lessons$ = concat(initialLessons$, searchLessons$);
+        this.lessons$ = fromEvent<any>(this.input.nativeElement, 'keyup')
+        .pipe(
+            map(event => event.target.value),
+            startWith(''),
+            debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(search => this.loadLessons(search))
+        );
 
     }
 
